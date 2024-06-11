@@ -1,0 +1,195 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ 
+}
+
+ .home{
+     height: 100vh;
+     background: #f6f5f7;
+ }
+ .home .element{
+     display: block;
+     text-align: center;
+     padding-top:5vh;
+ }
+ #map{
+     margin-top:  12vh;
+     margin-left: 10vw;
+     height: 80vh;
+     width: 80vw;
+     /* background-image: url(../img/mapa.jpg); */
+     border: 2px solid #1b1b1b;
+ }
+ .homeMap{
+    position: relative;
+    bottom:10vh;
+ }
+.mapForm{
+    margin-top:  2vh;
+    margin-left: 2.5% !important;
+    margin-bottom: 1%;
+    height: 80vh;
+    width: 95% !important;
+    /* background-image: url(../img/mapa.jpg); */
+    border: 2px solid #1b1b1b;
+}
+ .banner {
+     position: static;
+     top:16vh;
+    height: 100vh;
+    background:linear-gradient(to right, #FF4B2B, #FF416C);
+    background-size: cover;
+    
+   
+ }
+ .banner img.logo{
+     position: absolute;
+     left: 7vw;
+     top: 16vh;
+     max-width: 100%;
+     height: auto;
+     object-fit: cover;
+     z-index: 0;
+     
+ }
+ .banner .first{
+     position: absolute;
+     z-index: 1;
+     top: 44vh;
+     left:7vw;
+     font-weight: bold;
+     color:#fff;
+     font-size:30px;
+ }
+ .banner .two{
+     position: absolute;
+     z-index: 2;
+     top: 37vh;
+     right:26.5vw;
+     font-weight: bold;
+     color:#fff;
+     font-size:30px;
+ }
+ .banner .two span{
+     margin-left: 15vw;
+ }
+ .banner .download{
+     position: absolute;
+     top: 59vh;
+     right:35vw;
+     color:#fff;
+     font-size: 20px
+ }
+ td{
+    text-shadow: 0px 0px 5px darkred;
+ }
+ .banner img.iphone{
+     position: absolute;
+     right: 8vw;
+     top:13vh;
+ }
+ .banner img.appstore{
+     position: absolute;
+     right: 35.5vw;
+     bottom:21vh;
+ }
+
+.right{
+    float:right;
+    width:79%;
+    height: 80vh;
+    
+}
+.right map{
+  display: inline  
+}
+.left{
+    float:left;
+    background:#333;
+    width:20%;
+    height: auto;
+    
+}
+.block{
+    display:block;
+}
+
+
+@media (max-width: 767px){
+  
+.banner img.iphone{
+    left: -100%;
+}
+.banner img.logo{
+    top:10vh;
+    left: 30vw;
+}
+.banner .two{
+    left: 25vw;
+    font-size: 24px;
+    top:50vh;
+    width:80vw;
+}
+.banner .first{
+    left:30vw;
+    top:39vh;
+}
+.banner .download{
+    top:67vh;
+    right: 31vw;
+}
+.banner img.appstore{
+    top: 64vh;
+    right: 33vw;
+}
+}
+@media only screen and (max-width: 400px){
+    .banner img.logo{
+        left: 21vw;
+    }
+    .banner .two{
+        left: 17vw;
+        font-size: 21px;
+    }
+    .banner .first{
+        left:21vw;
+    }
+    .banner .download{
+        top:70vh;
+        right: 30vw;
+    }
+    .banner img.appstore{
+        right: 32vw;
+        top:67vh;
+    }
+    .element h1{
+        margin: 0 5vw;
+    }
+}
+@media only screen and (max-width: 375px){
+    .banner img.logo{
+        left: 20vw;
+    }
+    .banner .two{
+        left: 16vw;
+    }
+    .banner .first{
+        left:20vw;
+    }
+    .banner .download{
+        top:70vh;
+        right: 30vw;
+    }
+    .banner img.appstore{
+        right: 32vw;
+        top:67vh;
+    }
+    #map{
+        height: 115vw;
+    }
+}
+
+  
+

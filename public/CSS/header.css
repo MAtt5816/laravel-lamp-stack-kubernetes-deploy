@@ -1,0 +1,334 @@
+nav{
+  position: fixed;
+  top:0;
+  z-index: 1005;
+  overflow: hidden;
+  display: flex;
+  height: 12vh;
+  width: 100vw;
+  background: #1b1b1b;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px 0 16vw;
+  flex-wrap: wrap;
+}
+
+nav .logo{
+    color: #fff;
+    font-weight: bold;
+    display:block;
+    width: 40vw;
+    
+    
+}
+nav .logo img{
+  width: 6vw;
+  position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+nav .new{
+    display: block;
+    float:right;
+    margin-right: 14vh;
+}
+.money{
+    display: inline-block;
+    height: auto;
+    width:10vw;
+    border-radius: 999px;
+    background: #f2f2f2;
+    position: relative;
+    right: 11vw;
+    top: 4.5vh;
+}
+.money span{
+  position: relative;
+  right:-1vw;
+  top:1vh;
+}
+.money .add_cash{
+    padding:1vh 1vw;
+    border-radius: 999px;
+    background: coral;
+    border: none;
+    float:right;
+}
+nav .button {
+    margin-left: 1vw;
+    background: coral;
+    color: #fff;
+    border-radius: 20px;
+    padding: 1.6vh 1.6vw;
+    text-decoration: none;
+}
+nav .button:hover {
+    
+}
+.new a.user-icon{
+   color: #fff;
+   font-size: 26px;
+   text-align: center;
+}
+.new .user{
+   
+   font-size: 28px;
+   display: inline;
+}
+
+nav ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  position: fixed;
+  top: 13vh;
+  left: -100%;
+  background: #111;
+  height: auto;
+  width: 15%;
+  text-align: center;
+  display: block;
+  transition: all 0.3s ease;
+}
+nav ul li{
+  width: 100%;
+  margin: 6vh 0;
+}
+nav ul li a{
+  color: #f2f2f2;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 1.6vh 1.2vw;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-left: -100%;
+  display: block;
+  font-size: 18px;
+}
+
+nav ul li a:hover{
+  color: #111;
+  text-decoration: none;
+  background: none;
+  color: cyan;
+}
+nav .menu-btn i{
+  padding-top:3vh;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: block;
+}
+#click:checked ~ .menu-btn i:before{
+    content: "\f00d";
+}
+#click:checked ~ ul{
+    left: 0;
+  }
+  #click:checked ~ ul li a{
+    margin-left: 0;
+  }
+input[type="checkbox"]{
+  display: none;
+}
+#uclick:checked ~ ul{
+    left: 77vw;
+  }
+  #uclick:checked ~ ul li a{
+    margin-left: 0;
+  }
+.drop-btn {
+  position: relative;
+  top: -1.3vh;
+  padding: 1vh 0.5vw;
+  background:linear-gradient(to right, #FF4B2B, #FF416C);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  display: block;
+  
+  border-radius: 50%;
+  text-align: center;
+  width:3.5vw;
+}
+i.fa-user:before{
+    font-size: 30px;
+}
+div.user{
+  font-weight: bold;
+  background:linear-gradient(to right, #FF4B2B, #FF416C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 2vh 5vw;
+  border-bottom: 2px solid #fff;
+  
+}
+.nav {
+  display: inline;
+  width:30vw;
+}
+
+.dropdown ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  position: fixed;
+  top: 13vh;
+  left: -100%;
+  background: #111;
+  height: auto;
+  width: 10%;
+  text-align: center;
+  display: block;
+  transition: all 0.3s ease;
+}
+.dropdown ul li{
+  width: 100%;
+  margin: 6vh 0;
+}
+.dropdown ul li a{
+  color: #f2f2f2;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 1.6vh 1.2vw;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  
+  width: 100%;
+  margin-left: -100%;
+  display: block;
+  font-size: 18px;
+}
+
+.dropdown ul li a:hover{
+  color: #111;
+  text-decoration: none;
+  background: none;
+  color: cyan;
+}
+
+@media (max-width: 767px){
+nav .new{
+  position:absolute;
+right: -11vw;
+}
+nav .logo img{
+  width: 10vw;
+}
+nav .money{
+  width:20vw;
+  right: 18vw;
+  
+}
+nav .drop-btn{
+  position:relative;
+  left:5vw;
+  padding: 1vh 1vw;
+  width: 8vw;
+}
+nav ul{
+  width: 25%;
+}
+#uclick:checked ~ ul {
+  left:72vw;
+}
+}
+@media only screen and (max-width: 400px){
+  nav .new{
+    right: -26vw;
+    }
+    nav .logo img{
+      width: 18vw;
+    }
+    nav ul{
+      width: 33%;
+    }
+    #uclick:checked ~ ul {
+      left:67vw;
+    }
+    nav .money{
+      top:3vh;
+      width:25vw;
+      right: 13vw;
+      height: 3vh;
+      font-size: 12px;
+    }
+    .money .add_cash{
+      font-size: 11px;
+      height: 3vh;
+      padding-top:0.5vh;
+    }
+    .money span{
+      top:0.5vh;
+    }
+    nav .drop-btn{
+      position:relative;
+      left:14vw;
+      font-size: 20px;
+      top:-1.5vh;
+      padding: 1vh 1vw;
+      width: 12vw;
+    }
+    .new .user{
+      font-size: 25px;
+      padding: 2vh 7vw;
+    }
+}
+@media only screen and (max-width: 375px){
+  nav .new{
+  right: -21vw;
+  }
+  nav ul{
+    width: 30%;
+  }
+  nav .logo img{
+    width: 14vw;
+  }
+  nav ul{
+    width: 30%;
+    
+  }
+  nav ul li a{
+    font-size: 16px;
+  }
+  #uclick:checked ~ ul {
+    left:69vw;
+  }
+  nav .button{
+    padding:1vh 1vw;
+   
+  }
+  nav .drop-btn{
+    position:relative;
+    
+    font-size: 20px;
+
+  }
+ 
+  nav .money{
+    width:25vw;
+    top:4vh;
+    height: 3vh;
+    font-size: 12px;
+  }
+  .money .add_cash{
+    font-size: 11px;
+    height: 3vh;
+    padding-top:0.5vh;
+  }
+  .money span{
+    top:0.5vh;
+  }
+  nav .logo img{
+    width: 18vw;
+  }
+  .new .user{
+    
+    padding: 2vh 6vw;
+  }
+}

@@ -1,0 +1,259 @@
+body {
+	background: #f6f5f7;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: max-content;
+	margin: -3vh 0 4vw;
+}
+.settings{
+     background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 80vw;
+	max-width: 100%;
+	height: 80vh;
+    margin-top: 5%;
+}
+.settings .settings_panel_left{
+background: linear-gradient(to right, #FF4B2B, #FF416C);
+display: block;
+float: left;
+text-align: center;
+width:25%;
+height: 100%; 
+}
+.settings .settings_panel_left input[type="button"]{
+    margin-left:2vw;
+}
+.settings .settings_panel_right{
+    display: block;
+float: right;
+width:75%;
+height: 100%;
+text-align: center;
+margin-top: 10%;     
+}
+.settings_panel_right .header{
+    position: relative;
+    top: -18vh;
+}
+.settings_panel_right h1{
+    font-size: 20px;
+        color: #818181;
+}
+.settings_panel_right label{
+    font-size: 20px;
+        color: #818181;
+        text-align: left;
+        margin-left: 4vw;
+}
+.settings_panel_left .user_logo i{
+    margin-top: 5vh;
+    font-size: 55px;
+    color: #fff;
+}
+.settings_panel_left .user{
+    font-size: 20px;
+    color: #fff;
+}
+.settings_panel_left h4{
+    color:#fff;
+}
+.settings_panel_left hr{
+    background-color: #fff;
+    
+}
+.settings_panel_left a.return i{
+    position:relative;
+    top: 7vh;
+    left:3vw;
+   display:inline-block;
+    font-size: 30px;
+    color:#fff; 
+    float:left;
+}
+input {
+    border: 1px solid #242c37;
+    border-radius: 999px;
+    background-color: transparent;
+    text-align: left;
+    width: 16vw;
+    height: 5vh;
+    margin: 1.6vh 1vw;
+    text-align: center;
+}
+input[type="submit"], input[type="button"], input[type="reset"]{
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    color: #fff;
+    margin-bottom: 1vh;
+    text-align: center;
+    border: none;
+    
+}
+a {
+    text-decoration: none;
+}
+.submit{
+   background: linear-gradient(to right, #FF4B2B, #FF416C);
+    color: #fff;
+    margin-bottom: 1vh;
+    text-align: center;
+    border: none; 
+    padding: 2vh 3vw;
+    border-radius: 999px;
+}
+input[type=password]{
+    margin-left: 10vw;
+    width:40vw;
+}
+.include .right{
+width:50%;
+    float:right;   
+}
+.include .left{
+width:49%;
+    float:left;   
+}
+label,input{
+  display:block;
+}
+.include {
+    position: absolute;
+    top:10vh;
+}
+.include h3{
+    text-align: left;
+    margin-left: 3vw;
+}
+.include .btno{
+    clear: both;
+    width:50%;
+    float:left;   
+}
+.include .btnk{
+    position: relative;
+    top: 2vh;
+    left: 1.5vw;
+}
+.include .red{
+    color:red;
+    font-weight: bold;
+    font-size: 26px;
+}
+.include .text{
+    margin-left: 5vw;
+    font-size: 20px;
+}
+@media (max-width: 767px){
+.settings{
+    width: 95vw;
+}
+.include .left input, .include .right input{
+width:30vw;
+}
+.include .text{
+    font-size: 18px;
+    margin-right: 8vw;
+}
+
+    
+.settings_panel_right .header{
+    position: relative;
+    top:-9vh;
+}
+}
+@media only screen and (max-width: 400px){
+    .settings{
+        height: 95vh;
+    }
+    .settings .settings_panel_left{
+    width:35%;
+}
+.settings .settings_panel_right{
+    width:65%;
+}
+ .include .right, .include .left{
+    width:100%;
+ } 
+ .include .left input, .include .right input{
+    width:45vw;
+    height: 3vh;
+    margin: 1vh 8vw;
+    font-size: 14px;
+    }
+    .include .left label, .include .right label{
+        text-align: center;
+        font-size: 16px;
+    }
+    .include{
+        padding-top: 0;
+        top:8vh;
+    }
+    .header{
+        margin-top:7vh;
+    }
+    .header h1{
+        position: relative;
+        top: 2vh;
+    }
+    .alert-success{
+        position:absolute;
+        bottom:-5vh;
+        font-size: 13px;
+    }
+    input[type="button"]{
+        width:30vw;
+    }
+    .settings_panel_right form p {
+        font-size: 15px;
+        margin-left:2vw;
+    }
+}
+@media only screen and (max-width: 375px){
+    .settings{
+        height: 95vh;
+    }
+    .settings .settings_panel_left{
+    width:35%;
+}
+.settings .settings_panel_right{
+    width:65%;
+}
+ .include .right, .include .left{
+    width:100%;
+ } 
+ .include .left input, .include .right input{
+    width:45vw;
+    height: 3vh;
+    margin: 1vh 8vw;
+    font-size: 14px;
+    }
+    .include .left label, .include .right label{
+        text-align: center;
+        font-size: 16px;
+    }
+    .include{
+        top:7vh;
+    }
+    .header h1{
+        position: relative;
+        top: 1vh;
+    }
+    .alert-success{
+        position:absolute;
+        bottom:-5vh;
+        font-size: 13px;
+    }
+    input[type="button"]{
+        width:30vw;
+    }
+    .settings_panel_right form p {
+        font-size: 15px;
+        margin-left:2vw;
+    }
+}
