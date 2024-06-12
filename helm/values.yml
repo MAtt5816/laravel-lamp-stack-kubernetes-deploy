@@ -11,3 +11,5 @@ php:
       value: 3306
     - name: DB_HOST
       value: localhost
+    - name: APP_URL
+      value: http://laravel-kube.com
