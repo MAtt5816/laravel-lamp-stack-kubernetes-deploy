@@ -30,9 +30,13 @@ Niniejszy projekt polegał na skonteneryzowaniu wyżej wspomnianiej aplikacji w 
 	2. Należy ustawić nazwę bazy danych, nazwę użytkownika i hasła.
 	3. Wygeneruj nowy klucz aplikacji za pomocą poniższej komendy i wpisz go do pliku *secrets.yml*.
 	 ```bash
+	 docker run --rm -v $(pwd):/app -w /app composer update
+	 docker run --rm -v $(pwd):/app -w /app composer install
+	 cp .env.example .env
 	 docker run --rm -v $(pwd):/app php:cli php /app/artisan key:generate
+	 cat .env | grep APP_KEY
 	 ```
- 3. Plik [ingress.yaml](ingress.yaml):
+3. Plik [ingress.yaml](ingress.yaml):
 	 1. Należy ustawić nazwę hosta (*host*) zgodnie z wartością **APP_URL** z pliku *helm/values.yml*.
 
 ## Wdrożenie
@@ -44,18 +48,28 @@ Niniejszy projekt polegał na skonteneryzowaniu wyżej wspomnianiej aplikacji w 
 ### Uruchomienie
 1. Zainstaluj aplikację poprzez Helm:
 ```bash
+helm repo add stable https://charts.helm.sh/stable
 helm install laravel-kubernetes -f helm/values.yml -f helm/secrets.yml stable/lamp
 ```
-2. Uruchom Ingress:
+2. Wyświetl pody i skopiuj nazwę poda zaczynającego się od `laravel-kubernetes-lamp`:
+```bash
+kubectl get pod
+```
+3. Zaczekaj na pełne uruchomienie podów.
+4. Zainicjuj bazę danych (użyj skopiowanej nazwy poda):
+```bash
+kubectl exec laravel-kubernetes-lamp-6ddf7d548b-k87zv -- php artisan migrate --force
+```
+5. Uruchom Ingress:
 ```bash
 kubectl apply -f ingress.yaml
 ```
-3. W przypadku użycia Minikube otwórz nowy termial i otwórz tunel Minikube:
+6. W przypadku użycia Minikube otwórz nowy termial i otwórz tunel Minikube:
 ```bash
 minikube tunnel
 ```
-4. W przypadku uruchomienia w środowisku lokalnym dodaj nazwę hosta i IP Kubernetes/Minikube do pliku systemowego `/etc/hosts`.
-5. Zaczekaj na uruchomienie usług i otwórz aplikację w przeglądarce pod adresem zdefiniowanym w **APP_URL**.
+7. W przypadku uruchomienia w środowisku lokalnym dodaj nazwę hosta i IP Kubernetes/Minikube do pliku systemowego `/etc/hosts`.
+8. Zaczekaj na uruchomienie usług i otwórz aplikację w przeglądarce pod adresem zdefiniowanym w **APP_URL**.
 
 ## Odniesienia
 * [Tutorial: How To Deploy Laravel 7 and MySQL on Kubernetes using Helm](https://www.digitalocean.com/community/tutorials/how-to-deploy-laravel-7-and-mysql-on-kubernetes-using-helm)

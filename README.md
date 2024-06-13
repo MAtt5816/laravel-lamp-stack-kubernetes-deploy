@@ -34,8 +34,13 @@ This project involved containerizing the aforementioned application in the LAMP 
    2. Set the database name, username, and passwords.
    3. Generate a new application key using the command below and enter it into the *secrets.yml* file.
    ```bash
+   docker run --rm -v $(pwd):/app -w /app composer update
+   docker run --rm -v $(pwd):/app -w /app composer install
+   cp .env.example .env
    docker run --rm -v $(pwd):/app php:cli php /app/artisan key:generate
-3.  File [ingress.yaml](ingress.yaml):
+   cat .env | grep APP_KEY
+   ```
+3. File [ingress.yaml](ingress.yaml):
     1.  Set the host name (_host_) according to the value of **APP_URL** from the _helm/values.yml_ file.
 
 ## Deployment
@@ -50,20 +55,29 @@ This project involved containerizing the aforementioned application in the LAMP 
 
 1.  Install the application via Helm:
 ```bash
+helm repo add stable https://charts.helm.sh/stable
 helm install laravel-kubernetes -f helm/values.yml -f helm/secrets.yml stable/lamp
 ```
-2.  Start Ingress:
-
+2. Display pods and copy the name of the pod starting with `laravel-kubernetes-lamp`:
+```bash
+kubectl get pod
+```
+3. Wait for the pods to be fully operational.
+4. Initialize the database (use the pod name you copied earlier):
+```bash
+kubectl exec laravel-kubernetes-lamp-6ddf7d548b-k87zv -- php artisan migrate --force
+```
+5. Start Ingress:
 ```bash
 kubectl apply -f ingress.yaml
 ```
-If using Minikube, open a new terminal and start the Minikube tunnel:
+6. If using Minikube, open a new terminal and start the Minikube tunnel:
 ```bash
 minikube tunnel
 ```
-3.  If running locally, add the hostname and Kubernetes/Minikube IP to your system `/etc/hosts` file.
-4.  Wait for the services to start and open the application in your browser at the address defined in **APP_URL**.
+7. If running locally, add the hostname and Kubernetes/Minikube IP to your system `/etc/hosts` file.
+8. Wait for the services to start and open the application in your browser at the address defined in **APP_URL**.
 
 ## References
--   [Tutorial: How To Deploy Laravel 7 and MySQL on Kubernetes using Helm](https://www.digitalocean.com/community/tutorials/how-to-deploy-laravel-7-and-mysql-on-kubernetes-using-helm)
--   [Kubernetes: deploy Laravel the easy way](https://learnk8s.io/blog/kubernetes-deploy-laravel-the-easy-way)
+- [Tutorial: How To Deploy Laravel 7 and MySQL on Kubernetes using Helm](https://www.digitalocean.com/community/tutorials/how-to-deploy-laravel-7-and-mysql-on-kubernetes-using-helm)
+- [Kubernetes: deploy Laravel the easy way](https://learnk8s.io/blog/kubernetes-deploy-laravel-the-easy-way)
