@@ -1,73 +1,69 @@
-# Diploma project - **Web application for booking and paying for parking spaces**
-<hr />
+# Implementation of LAMP Stack on Kubernetes Platform Using Laravel Application
 
-**Collaborator:** [@PoProstuStacho](https://github.com/PoProstuStacho)
+Polish version README =>  [Wersja polska instrukcji](README.PL.md)
+---
 
-> **_NOTE:_**  .env & config/database.php files are unstaged.
+## Table of Contents
+1. [Project Description](#Project-Description)
+2. [Architecture](#Architecture)
+3. [Configuration](#Configuration)
+4. [Deployment](#Deployment)
+5. [References](#References)
 
-<hr />
+## Project Description
+The application is based on part of the engineering project "[Web Application for Reserving and Paying for Parking Spaces](https://github.com/MAtt5816/diploma-project-parking-app)".
 
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Architecture
+The application is built on the Laravel framework in PHP and uses a MySQL database. 
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project involved containerizing the aforementioned application in the LAMP stack and deploying it on the Kubernetes platform.
 
-## About Laravel
+### Detailed list of manifests:
+* *[Dockerfile](Dockerfile)* - description of the Docker image for the main application
+* *[docker-compose.yml](docker-compose.yml)* - description of dependencies and project configuration for Docker Compose
+* *[helm/values.yml](helm/values.yml)* - application environment variables used by HELM
+* *[helm/secrets-example.yml](helm/secrets-example.yml)* - example of the *secrets.yml* file containing secrets used by HELM
+* *[ingress.yaml](ingress.yaml)* - Ingress configuration
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Configuration
+1. File [helm/values.yml](helm/values.yml):
+   1. Set the **APP_URL** variable to match your domain name.
+   2. If necessary, edit other environment variables.
+2. File [helm/secrets.yml](helm/secrets.yml):
+   1. Create *secrets.yml* based on the example [helm/secrets-example.yml](helm/secrets-example.yml).
+   2. Set the database name, username, and passwords.
+   3. Generate a new application key using the command below and enter it into the *secrets.yml* file.
+   ```bash
+   docker run --rm -v $(pwd):/app php:cli php /app/artisan key:generate
+3.  File [ingress.yaml](ingress.yaml):
+    1.  Set the host name (_host_) according to the value of **APP_URL** from the _helm/values.yml_ file.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Deployment
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Prerequisites
 
-## Learning Laravel
+-   Kubernetes or Minikube
+-   Helm
+-   Ingress
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Launch
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1.  Install the application via Helm:
+```bash
+helm install laravel-kubernetes -f helm/values.yml -f helm/secrets.yml stable/lamp
+```
+2.  Start Ingress:
 
-## Laravel Sponsors
+```bash
+kubectl apply -f ingress.yaml
+```
+If using Minikube, open a new terminal and start the Minikube tunnel:
+```bash
+minikube tunnel
+```
+3.  If running locally, add the hostname and Kubernetes/Minikube IP to your system `/etc/hosts` file.
+4.  Wait for the services to start and open the application in your browser at the address defined in **APP_URL**.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## References
+-   [Tutorial: How To Deploy Laravel 7 and MySQL on Kubernetes using Helm](https://www.digitalocean.com/community/tutorials/how-to-deploy-laravel-7-and-mysql-on-kubernetes-using-helm)
+-   [Kubernetes: deploy Laravel the easy way](https://learnk8s.io/blog/kubernetes-deploy-laravel-the-easy-way)
